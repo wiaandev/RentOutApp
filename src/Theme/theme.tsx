@@ -1,14 +1,21 @@
-import { createTheme } from "@mui/material";
+import {createTheme, ThemeOptions} from "@mui/material";
 
-const fontList = `"FONT_NAME1, FONTNAME_2"`;
+const fontList = `"Syne, Inter, Roboto"`;
 
-let theme = createTheme({
+const theme: ThemeOptions = createTheme({
     palette: {
         primary: {
-            main: ''
+            main: '#FE5534',
         },
         secondary: {
-            main: ''
+            main: '#ffffff',
+        },
+        background: {
+            default: '#16171B',
+            paper: '#3B3E45',
+        },
+        text: {
+            primary: 'rgba(255,255,255,0.87)',
         },
     },
     typography: {

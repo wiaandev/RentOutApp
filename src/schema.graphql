@@ -1,4 +1,132 @@
-# Replace this with your own GraphQL schema file!
 type Query {
-  field: String
+  """
+  Fetches an object given its ID.
+  """
+  node(
+    """
+    ID of the object.
+    """
+    id: ID!
+  ): Node
+
+  """
+  Lookup nodes by a list of IDs.
+  """
+  nodes(
+    """
+    The list of node IDs.
+    """
+    ids: [ID!]!
+  ): [Node]!
+  properties: [PropertyPost!]!
+  users: [User!]!
+}
+
+"""
+The node interface is implemented by entities that have a global unique identifier.
+"""
+interface Node {
+  id: ID!
+}
+
+"""
+The `TimeSpan` scalar represents an ISO-8601 compliant duration type.
+"""
+scalar TimeSpan
+
+"""
+A local date and time in a particular calendar system, combined with an offset from UTC.
+"""
+scalar OffsetDateTime
+
+"""
+LocalDate is an immutable struct representing a date within the calendar, with no reference to a particular time zone or time of day.
+"""
+scalar LocalDate
+
+"""
+LocalTime is an immutable struct representing a time of day, with no reference to a particular calendar, time zone or date.
+"""
+scalar LocalTime
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
+
+type PropertyExtras {
+  id: ID!
+  propertyPostId: Int!
+  property: PropertyPost!
+  hasFiber: Boolean!
+  petsAllowed: Boolean!
+  hasPool: Boolean!
+  hasGarden: Boolean!
+  hasPatio: Boolean!
+  hasFlatlet: Boolean!
+}
+
+type User {
+  firstName: String!
+  lastName: String!
+  isDeleted: Boolean!
+  adminUser: AdminUser
+  property: PropertyPost!
+  propertyPostId: Int!
+  id: Int!
+  userName: String
+  normalizedUserName: String
+  email: String
+  normalizedEmail: String
+  emailConfirmed: Boolean!
+  passwordHash: String
+  securityStamp: String
+  concurrencyStamp: String
+  phoneNumber: String
+  phoneNumberConfirmed: Boolean!
+  twoFactorEnabled: Boolean!
+  lockoutEnd: DateTime
+  lockoutEnabled: Boolean!
+  accessFailedCount: Int!
+}
+
+type PropertyPost implements Node {
+  id: ID!
+  propertyType: RentType!
+  weeklyAmount: Int!
+  bedroomAmount: Int!
+  bathroomAmount: Int!
+  parkingAmount: Int!
+  petAmount: Int
+  petType: [AllowedPetType!]
+  createdAt: DateTime!
+  propertyExtras: PropertyExtras
+}
+
+enum RentType {
+  APARTMENT
+  HOUSE
+  FLAT
+  PLOT
+  DUPLEX
+  TOWNHOUSE
+}
+
+"""
+The `DateTime` scalar represents an ISO-8601 compliant date time type.
+"""
+scalar DateTime @specifiedBy(url: "https://www.graphql-scalars.com/date-time")
+
+type AdminUser {
+  id: Int!
+  user: User!
+  userId: Int!
+}
+
+enum AllowedPetType {
+  DOG
+  CAT
+  HAMSTER
+  BIRD
+  FISH
 }
