@@ -90,6 +90,17 @@ let theme = createTheme({
                 elevation: 0
             },
         },
+        MuiButton: {
+            defaultProps: {
+                disableRipple: true,
+                disableElevation: true,
+            },
+            styleOverrides: {
+                root: {
+                    textTransform: 'none',
+                }
+            }
+        }
     },
 
 })
