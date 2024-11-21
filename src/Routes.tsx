@@ -1,9 +1,10 @@
 import {IEnvironment} from "relay-runtime";
-import {createBrowserRouter, createRoutesFromElements, Navigate, Outlet, Route} from "react-router-dom";
+import {createBrowserRouter, createRoutesFromElements, Outlet, Route} from "react-router-dom";
 import React from "react";
 import {RootLayout} from "./Layouts/RootLayout.tsx";
 import {RouterProvider} from "react-router";
 import {Login} from "./Pages/Login.tsx";
+import {Landing} from "./Pages/Landing.tsx";
 
 interface Props {
     relayEnv: IEnvironment;
@@ -17,13 +18,11 @@ const router = (_relayEnv: IEnvironment) => {
                 <Route element={<RootLayout/>}>
                     <Route
                         element={
-                            <AuthBlocker>
                                 <Outlet />
-                            </AuthBlocker>
                         }
                     >
-                        <Route index element={<Navigate to={'/login'} replace/>}/>
-                        <Route path={'login'} element={<Login/>}/>
+                        <Route path={'/'} element={<Landing/>}/>
+                        <Route path={'/login'} element={<Login/>}/>
                     </Route>
                 </Route>
             </React.Fragment>
