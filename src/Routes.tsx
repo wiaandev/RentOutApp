@@ -5,6 +5,8 @@ import {RootLayout} from "./Layouts/RootLayout.tsx";
 import {RouterProvider} from "react-router";
 import {Login} from "./Pages/Login.tsx";
 import {Landing} from "./Pages/Landing.tsx";
+import {Register} from "./Pages/Register.tsx";
+import {PropertyListings} from "./Pages/PropertyListings.tsx";
 
 interface Props {
     relayEnv: IEnvironment;
@@ -23,6 +25,8 @@ const router = (_relayEnv: IEnvironment) => {
                     >
                         <Route path={'/'} element={<Landing/>}/>
                         <Route path={'/login'} element={<Login/>}/>
+                        <Route path={'/register'} element={<Register/>}/>
+                        <Route path={'/listings'} element={<PropertyListings/>}/>
                     </Route>
                 </Route>
             </React.Fragment>
