@@ -1,7 +1,7 @@
 import {createTheme, responsiveFontSizes} from "@mui/material";
 
 const fontList =
-    `"Syne", "Inter", "Helvetica", "Arial", "sans-serif"`;
+    `"Syne", "Poppins", "Helvetica", "Arial", "sans-serif"`;
 
 let theme = createTheme({
     palette: {
@@ -51,37 +51,37 @@ let theme = createTheme({
         h6: {
             fontSize: 18,
             fontWeight: 600,
-            fontFamily: 'Inter',
+            fontFamily: 'Poppins',
         },
         body1: {
             fontSize: 14,
             fontWeight: 500,
-            fontFamily: 'Inter',
+            fontFamily: 'Poppins',
         },
         body2: {
             fontSize: 12,
             fontWeight: 500,
-            fontFamily: 'Inter',
+            fontFamily: 'Poppins',
         },
         subtitle1: {
             fontSize: 16,
             fontWeight: 700,
-            fontFamily: 'Inter',
+            fontFamily: 'Poppins',
         },
         subtitle2: {
             fontSize: 16,
             fontWeight: 500,
-            fontFamily: 'Inter',
+            fontFamily: 'Poppins',
         },
         caption: {
             fontSize: 12,
             fontWeight: 500,
-            fontFamily: 'Inter',
+            fontFamily: 'Poppins',
         },
         overline: {
             fontWeight: 500,
             fontSize: 10,
-            fontFamily: 'Inter',
+            fontFamily: 'Poppins',
         },
     },
     components: {
