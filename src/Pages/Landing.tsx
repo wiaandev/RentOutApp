@@ -1,5 +1,6 @@
 import {Button, Grid2, ImageList, ImageListItem, Paper, Typography} from "@mui/material";
 import {useNavigate} from "react-router";
+import Logo from '../assets/logo.svg';
 
 export function Landing() {
 
@@ -60,6 +61,7 @@ export function Landing() {
     return (
         <Grid2 size={'grow'} container>
             <Grid2 size={'grow'} p={3} rowGap={2} justifyContent={'center'} alignItems={'center'}>
+            <img src={Logo} alt={'logo'}/>
                 <Grid2 size={12} mb={5}>
                     <Typography fontFamily={'Syne'} fontSize={'60px'}>Welcome to RentOut.</Typography>
                     <Typography variant={'subtitle2'}>Rentout is a platform for renting your home</Typography>

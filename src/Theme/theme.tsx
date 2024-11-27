@@ -6,17 +6,17 @@ const fontList =
 let theme = createTheme({
     palette: {
         primary: {
-            main: '#FE5534',
+            main: '#1d1b19',
         },
         secondary: {
-            main: '#ffffff',
+            main: '#fe300b',
         },
         background: {
-            default: '#16171B',
-            paper: '#3B3E45',
+            default: '#faf5f1',
+            paper: '#e1ddd9',
         },
         text: {
-            primary: 'rgba(255,255,255,0.87)',
+            primary: '#1d1b19',
         },
     },
     typography: {
