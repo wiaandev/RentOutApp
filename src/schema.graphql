@@ -22,6 +22,10 @@ type Query {
   users: [User!]!
 }
 
+type Mutation {
+  userRegistration(input: UserRegistrationInput!): UserRegistrationPayload!
+}
+
 """
 The node interface is implemented by entities that have a global unique identifier.
 """
@@ -66,11 +70,34 @@ type PropertyExtras {
   hasFlatlet: Boolean!
 }
 
+type PropertyPost implements Node {
+  id: ID!
+  propertyType: RentType!
+  weeklyAmount: Int!
+  bedroomAmount: Int!
+  bathroomAmount: Int!
+  parkingAmount: Int!
+  petAmount: Int
+  petType: [AllowedPetType!]
+  createdAt: DateTime!
+  propertyExtras: PropertyExtras
+}
+
+input UserRegistrationRequestInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  confirmPassword: String!
+  phoneNumber: String!
+}
+
 type User {
   firstName: String!
   lastName: String!
   isDeleted: Boolean!
   adminUser: AdminUser
+  isRenter: Boolean!
   property: PropertyPost!
   propertyPostId: Int!
   id: Int!
@@ -90,17 +117,23 @@ type User {
   accessFailedCount: Int!
 }
 
-type PropertyPost implements Node {
-  id: ID!
-  propertyType: RentType!
-  weeklyAmount: Int!
-  bedroomAmount: Int!
-  bathroomAmount: Int!
-  parkingAmount: Int!
-  petAmount: Int
-  petType: [AllowedPetType!]
-  createdAt: DateTime!
-  propertyExtras: PropertyExtras
+type AdminUser {
+  id: Int!
+  user: User!
+  userId: Int!
+}
+
+"""
+The `DateTime` scalar represents an ISO-8601 compliant date time type.
+"""
+scalar DateTime @specifiedBy(url: "https://www.graphql-scalars.com/date-time")
+
+enum AllowedPetType {
+  DOG
+  CAT
+  HAMSTER
+  BIRD
+  FISH
 }
 
 enum RentType {
@@ -112,21 +145,10 @@ enum RentType {
   TOWNHOUSE
 }
 
-"""
-The `DateTime` scalar represents an ISO-8601 compliant date time type.
-"""
-scalar DateTime @specifiedBy(url: "https://www.graphql-scalars.com/date-time")
-
-type AdminUser {
-  id: Int!
-  user: User!
-  userId: Int!
+input UserRegistrationInput {
+  input: UserRegistrationRequestInput!
 }
 
-enum AllowedPetType {
-  DOG
-  CAT
-  HAMSTER
-  BIRD
-  FISH
+type UserRegistrationPayload {
+  user: User
 }
