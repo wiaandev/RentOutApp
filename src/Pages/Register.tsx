@@ -2,7 +2,7 @@ import {Button, FormControlLabel, Grid2, Typography} from "@mui/material";
 import Logo from '../assets/logo.svg';
 import {Form} from "../Components/Form/Form.tsx";
 import {FieldValues, SubmitHandler, useForm} from "react-hook-form";
-import {Radio, RadioGroup, TextField} from "@stackworx/react-hook-form-mui";
+import {CheckboxWithLabel, Radio, RadioGroup, TextField} from "@stackworx/react-hook-form-mui";
 import {PasswordTextField} from "../Components/Form/PasswordTextField.tsx";
 
 interface FormValues {
@@ -11,13 +11,18 @@ interface FormValues {
     email: string;
     password: string;
     confirmPassword: string;
-    profileType: string;
+    isRenter: boolean;
 }
 
 
 export const Register = () => {
-    const defaultValues = {
+    const defaultValues: FormValues = {
         email: '',
+        firstName: '',
+        confirmPassword: '',
+        password: '',
+        isRenter: false,
+        lastName: ''
     }
         const form = useForm<FieldValues>({defaultValues});
 
@@ -29,7 +34,7 @@ export const Register = () => {
         <Typography variant={'h1'}>Register</Typography>
 
 
-        <Form {...form} onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit} {...form}>
             <Grid2 size={12} container direction={'column'}>
 
                 <Grid2 container size={'grow'}>
@@ -40,10 +45,7 @@ export const Register = () => {
                 </Grid2>
             <PasswordTextField control={form.control} name={'password'} label={'Password'}/>
             <PasswordTextField control={form.control} name={'confirmPassword'} label={'Confirm Password'}/>
-            <RadioGroup name={'profileType'}>
-                <FormControlLabel label={'I am renting'} control={<Radio control={form.control}/>}/>
-                <FormControlLabel label={'I am buying'} control={<Radio control={form.control}/>}/>
-            </RadioGroup>
+            <CheckboxWithLabel label='I want to list my place' name='isRenter'/>
             </Grid2>
             <Button type={'submit'} variant={'contained'}>Submit</Button>
         </Form>

@@ -24,7 +24,7 @@ let theme = createTheme({
             fontFamily: fontList,
         },
         h1: {
-            fontSize: 32,
+            fontSize: 48,
             fontWeight: 700,
             fontFamily: 'Syne',
         },

@@ -63,7 +63,7 @@ export function Landing() {
             <Grid2 size={'grow'} p={3} rowGap={2} justifyContent={'center'} alignItems={'center'}>
             <img src={Logo} alt={'logo'}/>
                 <Grid2 size={12} mb={5}>
-                    <Typography fontFamily={'Syne'} fontSize={'60px'}>Welcome to RentOut.</Typography>
+                    <Typography variant='h1'>Welcome to RentOut.</Typography>
                     <Typography variant={'subtitle2'}>Rentout is a platform for renting your home</Typography>
                 </Grid2>
                 <Grid2 my={2}>
