@@ -7,6 +7,7 @@ import {Login} from "./Pages/Login.tsx";
 import {Landing} from "./Pages/Landing.tsx";
 import {Register} from "./Pages/Register.tsx";
 import {PropertyListings} from "./Pages/PropertyListings/PropertyListings.tsx";
+import {ViewProperty} from "./Pages/ViewProperty/ViewProperty.tsx";
 
 interface Props {
     relayEnv: IEnvironment;
@@ -27,6 +28,7 @@ const router = (_relayEnv: IEnvironment) => {
                         <Route path={'/login'} element={<Login/>}/>
                         <Route path={'/register'} element={<Register/>}/>
                         <Route path={'/listings'} element={<PropertyListings/>}/>
+                        <Route path={'/listings/view/:id'} element={<ViewProperty/>}/>
                     </Route>
                 </Route>
             </React.Fragment>

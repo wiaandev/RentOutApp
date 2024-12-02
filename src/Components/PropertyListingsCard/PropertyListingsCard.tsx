@@ -1,14 +1,16 @@
-import {Avatar, Divider, Grid2, Paper, Typography} from "@mui/material";
+import {Avatar, Button, Divider, Grid2, Paper, Typography} from "@mui/material";
 import {calculateTimeDifference} from "../../Utils/timeHelper.ts";
 import {Bathroom, BedroomParent, Deck, DirectionsCar, Pets, Pool, SignalWifi4Bar} from "@mui/icons-material";
 import {graphql, useFragment} from "react-relay";
 import {PropertyListingsCard_query$key} from "./__generated__/PropertyListingsCard_query.graphql.ts";
+import {useNavigate} from "react-router";
 
 interface PropertyListingsCardProps {
     propertyListingsCardRef: PropertyListingsCard_query$key;
 }
 
 export const PropertyListingsCard = ({propertyListingsCardRef}: PropertyListingsCardProps) => {
+    const navigate = useNavigate();
     const data = useFragment(graphql`
         fragment PropertyListingsCard_query on PropertyPost {
             id
@@ -70,7 +72,11 @@ export const PropertyListingsCard = ({propertyListingsCardRef}: PropertyListings
                         {data.parkingAmount}
                     </Typography>
                 </Grid2>
+                <Grid2 size={'grow'} container justifyContent={'flex-end'}>
+                    <Button onClick={() => navigate(`/listings/view/${data.id}`)} variant={'contained'}>View</Button>
+                </Grid2>
             </Grid2>
+
             <Divider sx={{mb: 2}}/>
             <Typography>Extras</Typography>
             <Grid2 size={'auto'} container columnGap={4} alignItems={'center'}>
