@@ -9,6 +9,7 @@ import {graphql, useMutation} from "react-relay";
 import {RegisterMutation} from "./__generated__/RegisterMutation.graphql.ts";
 import {MuiTelInput} from "mui-tel-input";
 import React from "react";
+import {useNavigate} from "react-router";
 
 interface FormValues {
   firstName: string;
@@ -21,6 +22,7 @@ interface FormValues {
 
 export const Register = () => {
   const [value, setValue] = React.useState('')
+  const navigate = useNavigate();
 
   const handleChange = (newValue: string) => {
     setValue(newValue)
@@ -48,7 +50,6 @@ export const Register = () => {
   `)
 
   const onSubmit: SubmitHandler<FormValues> = async (data: FormValues) => {
-    console.log(data);
     mutate({variables: {
       input: {
         input: {
@@ -62,6 +63,7 @@ export const Register = () => {
       }
       }, onCompleted: (newData) => {
       console.log(newData);
+      navigate('/listings');
       }})
   };
   return (

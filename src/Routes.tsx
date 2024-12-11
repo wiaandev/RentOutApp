@@ -1,5 +1,5 @@
 import {IEnvironment} from "relay-runtime";
-import {createBrowserRouter, createRoutesFromElements, Outlet, Route} from "react-router-dom";
+import {createBrowserRouter, createRoutesFromElements, Navigate, Outlet, Route} from "react-router-dom";
 import React from "react";
 import {RootLayout} from "./Layouts/RootLayout.tsx";
 import {RouterProvider} from "react-router";
@@ -8,6 +8,7 @@ import {Landing} from "./Pages/Landing.tsx";
 import {Register} from "./Pages/Register.tsx";
 import {PropertyListings} from "./Pages/PropertyListings/PropertyListings.tsx";
 import {ViewProperty} from "./Pages/ViewProperty/ViewProperty.tsx";
+import {AuthContext} from "./Context/AuthContext.tsx";
 
 interface Props {
     relayEnv: IEnvironment;
@@ -27,7 +28,8 @@ const router = (_relayEnv: IEnvironment) => {
                         <Route path={'/'} element={<Landing/>}/>
                         <Route path={'/login'} element={<Login/>}/>
                         <Route path={'/register'} element={<Register/>}/>
-                        <Route path={'/listings'} element={<PropertyListings/>}/>
+
+                        <Route path={'/listings'} element={<AuthBlocker><PropertyListings/></AuthBlocker>}/>
                         <Route path={'/listings/view/:id'} element={<ViewProperty/>}/>
                     </Route>
                 </Route>
@@ -38,11 +40,11 @@ const router = (_relayEnv: IEnvironment) => {
 
 // TODO: use for authenticated routes
 function AuthBlocker({children}: {children: React.ReactNode}) {
-    // const {authenticated} = React.useContext(AuthContext);
+    const {authenticated} = React.useContext(AuthContext);
 
-    // if (!authenticated) {
-    //     return <Navigate to='home' />;
-    // }
+    if (!authenticated) {
+        return <Navigate to='/' />;
+    }
 
     return children;
 }

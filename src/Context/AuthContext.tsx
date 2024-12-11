@@ -31,10 +31,9 @@ export function useAuthContext() {
 
 export const AuthContextController = React.memo(function AuthContextController({
                                                                                    children,
-                                                                                   resetEnvironment,
                                                                                }: {
     children: React.ReactNode;
-    resetEnvironment: () => void;
+
 }) {
     const [initialized, setInitialized] = React.useState(false);
     const [authenticated, setAuthenticated] = React.useState(false);
@@ -81,14 +80,13 @@ export const AuthContextController = React.memo(function AuthContextController({
     const handleLogin = React.useCallback(() => {
         setAuthenticated(true);
         setInitialized(false);
-        resetEnvironment();
-    }, [resetEnvironment]);
+
+    }, []);
 
     const handleLogout = React.useCallback(() => {
         setAuthenticated(false);
         setRoles([]);
-        resetEnvironment();
-    }, [resetEnvironment]);
+    },[]);
 
     const value = React.useMemo(
         () => ({

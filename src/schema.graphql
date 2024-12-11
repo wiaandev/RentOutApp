@@ -23,6 +23,7 @@ type Query {
 }
 
 type Mutation {
+  login(input: LoginInput!): LoginPayload!
   userRegistration(input: UserRegistrationInput!): UserRegistrationPayload!
 }
 
@@ -143,6 +144,15 @@ enum RentType {
   PLOT
   DUPLEX
   TOWNHOUSE
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type LoginPayload {
+  user: User
 }
 
 input UserRegistrationInput {

@@ -7,6 +7,7 @@ import {theme} from "./Theme/theme.tsx";
 import {Loading} from "./Components/Loading/Loading.tsx";
 import environment from "./Hooks/useRelayEnv.ts";
 import {RelayEnvironmentProvider} from "react-relay";
+import {AuthContextController} from "./Context/AuthContext.tsx";
 export function App() {
     // https://dev.azure.com/Stackworx/Book-A-Pharmacy/_search?action=contents&text=useRelayEnv&type=code&lp=code-Project&filters=ProjectFilters%7BBook-A-Pharmacy%7DRepositoryFilters%7BBookAPharmacy%7D&pageSize=25&result=DefaultCollection/Book-A-Pharmacy/BookAPharmacy/GBmain//src/ClientApp/src/%40BookAPharmacy/BookAPharmacy/Hooks/useRelayEnv.ts
     // Extra Resource: https://relay.dev/docs/guides/network-layer/
@@ -32,9 +33,9 @@ function AppWithEnvironment(
                         <React.Suspense fallback={<Loading />}>
                             {/*<SnackBarProvider>*/}
                             {/*    <ModalContextProvider>*/}
-                            {/*        <AuthContextController resetEnvironment={resetEnvironment}>*/}
+                                    <AuthContextController>
                                         <CustomRouterProvider relayEnv={environment} />
-                                    {/*</AuthContextController>*/}
+                                    </AuthContextController>
                                 {/*</ModalContextProvider>*/}
                             {/*</SnackBarProvider>*/}
                         </React.Suspense>
