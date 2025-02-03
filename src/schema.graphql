@@ -19,6 +19,7 @@ type Query {
     ids: [ID!]!
   ): [Node]!
   properties: [PropertyPost!]!
+  property(propertyId: ID!): PropertyPost!
   users: [User!]!
 }
 

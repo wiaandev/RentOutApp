@@ -9,6 +9,7 @@ import {Register} from "./Pages/Register.tsx";
 import {PropertyListings} from "./Pages/PropertyListings/PropertyListings.tsx";
 import {ViewProperty} from "./Pages/ViewProperty/ViewProperty.tsx";
 import {AuthContext} from "./Context/AuthContext.tsx";
+// import {AuthContext} from "./Context/AuthContext.tsx";
 
 interface Props {
     relayEnv: IEnvironment;
@@ -29,8 +30,9 @@ const router = (_relayEnv: IEnvironment) => {
                         <Route path={'/login'} element={<Login/>}/>
                         <Route path={'/register'} element={<Register/>}/>
 
+
                         <Route path={'/listings'} element={<AuthBlocker><PropertyListings/></AuthBlocker>}/>
-                        <Route path={'/listings/view/:id'} element={<ViewProperty/>}/>
+                        <Route path={'/listings/view/:id'} element={<AuthBlocker><ViewProperty/></AuthBlocker>}/>
                     </Route>
                 </Route>
             </React.Fragment>
@@ -38,7 +40,7 @@ const router = (_relayEnv: IEnvironment) => {
     )
 }
 
-// TODO: use for authenticated routes
+// TODO: fix authentication bug -> authenticated state keeps returning false after login
 function AuthBlocker({children}: {children: React.ReactNode}) {
     const {authenticated} = React.useContext(AuthContext);
 

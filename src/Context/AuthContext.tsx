@@ -5,9 +5,9 @@ interface AuthContextType {
     authenticated: boolean;
     roles: Role[];
     me: {id: string; email: string; fullName: string} | null;
-    handleLogin(): void;
     handleLogout(): void;
     setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+    setInitialized: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface Role {
@@ -19,9 +19,9 @@ export interface Role {
 export const AuthContext = React.createContext<AuthContextType>({
     authenticated: false,
     setAuthenticated: () => false,
+    setInitialized: () => false,
     roles: [],
     me: null,
-    handleLogin: () => {},
     handleLogout: () => {},
 });
 
@@ -48,11 +48,10 @@ export const AuthContextController = React.memo(function AuthContextController({
 
     React.useEffect(() => {
         async function profile() {
-            if (initialized) {
-                return;
-            }
             try {
-                const resp = await fetch('/api/account/profile');
+                const resp = await fetch('/api/account/profile', {
+                    credentials: 'include', // 👈 Required for cookies
+                });
                 const json = await resp.json();
 
                 if (!json.value) {
@@ -63,7 +62,6 @@ export const AuthContextController = React.memo(function AuthContextController({
                     setAuthenticated(true);
                     setRoles(json.value.roles as Role[]);
                     setMe(json.value);
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 }
             } catch {
                 setAuthenticated(false);
@@ -75,13 +73,7 @@ export const AuthContextController = React.memo(function AuthContextController({
         }
 
         profile();
-    }, [setAuthenticated, setInitialized, initialized]);
-
-    const handleLogin = React.useCallback(() => {
-        setAuthenticated(true);
-        setInitialized(false);
-
-    }, []);
+    }, [setAuthenticated, setInitialized, initialized, authenticated])
 
     const handleLogout = React.useCallback(() => {
         setAuthenticated(false);
@@ -93,11 +85,11 @@ export const AuthContextController = React.memo(function AuthContextController({
             authenticated,
             roles,
             me,
-            handleLogin,
             handleLogout,
             setAuthenticated,
+            setInitialized,
         }),
-        [authenticated, setAuthenticated, handleLogin, handleLogout, me, roles],
+        [authenticated, setAuthenticated, handleLogout, me, roles],
     );
 
     if (!initialized) {

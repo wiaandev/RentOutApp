@@ -53,14 +53,14 @@ export const PropertyListingsCard = ({propertyListingsCardRef}: PropertyListings
             </Grid2>
             <Grid2 size={'grow'} container alignItems={'center'} columnGap={2} mb={2}>
                 <Grid2 size={'auto'} container alignItems={'center'} gap={1}>
-                    <BedroomParent/>
+                    <BedroomParent />
                     <Typography variant="body1">
                         {data.bedroomAmount}
                     </Typography>
                 </Grid2>
 
                 <Grid2 size={'auto'} container alignItems={'center'} gap={1}>
-                    <Bathroom/>
+                    <Bathroom />
                     <Typography variant="body2">
                         {data.bathroomAmount}
                     </Typography>
@@ -72,8 +72,15 @@ export const PropertyListingsCard = ({propertyListingsCardRef}: PropertyListings
                         {data.parkingAmount}
                     </Typography>
                 </Grid2>
-                <Grid2 size={'grow'} container justifyContent={'flex-end'}>
+                <Grid2 size={'grow'} container justifyContent={'flex-end'} flexDirection={'column'} rowGap={2}>
+                    <Grid2 container size={'grow'} flexDirection={'column'} textAlign={'right'}>
+                    <Typography variant={'h3'}>R{data.weeklyAmount}</Typography>
+                    <Typography variant={'overline'}>per week</Typography>
+                    </Grid2>
+                    <Grid2 container size={'grow'} justifyContent={'flex-end'}>
+
                     <Button onClick={() => navigate(`/listings/view/${data.id}`)} variant={'contained'}>View</Button>
+                    </Grid2>
                 </Grid2>
             </Grid2>
 

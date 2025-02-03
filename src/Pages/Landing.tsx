@@ -1,8 +1,10 @@
 import {Button, Grid2, ImageList, ImageListItem, Paper, Typography} from "@mui/material";
 import {useNavigate} from "react-router";
 import Logo from '../assets/logo.svg';
+import {useAuthContext} from "../Context/AuthContext.tsx";
 
 export function Landing() {
+    const {authenticated} = useAuthContext();
 
     const navigate = useNavigate();
 
@@ -56,6 +58,8 @@ export function Landing() {
             title: 'Coffee table',
         },
     ];
+
+    console.log(authenticated);
 
 
     return (

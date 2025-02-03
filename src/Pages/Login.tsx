@@ -15,7 +15,7 @@ type FormValues = {
 }
 
 export const Login: React.FC = () => {
-    const {authenticated, handleLogin} = useAuthContext();
+    const {authenticated, setAuthenticated, setInitialized} = useAuthContext();
     const [mutate] = useMutation<LoginMutation>(graphql`
         mutation LoginMutation($input: LoginInput!){
             login(input: $input){
@@ -29,21 +29,22 @@ export const Login: React.FC = () => {
     const form = useForm<FormValues>();
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        console.log(data);
         mutate({variables: {
             input: {
                 email: data.email,
                 password: data.password,
-            }
+            },
             }, onCompleted: () => {
-            handleLogin();
+            setAuthenticated(true);
+                setInitialized(false);
+            }, onError: (err) => {
+            console.log(err);
             }})
     }
     if (authenticated) {
         return <Navigate to='/listings' />;
     }
 
-    console.log(authenticated)
     return (
         <Grid2>
             <Form {...form} onSubmit={onSubmit}>
